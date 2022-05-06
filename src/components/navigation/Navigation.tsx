@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function Navigation() {
   return (
     <>
-      <Navbar bg="primary" variant="dark">
+      <Navbar bg="primary" sticky="top" variant="dark">
         <Container>
           <Navbar.Brand as={Link} to="/">
             Pokedex

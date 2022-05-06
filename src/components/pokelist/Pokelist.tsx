@@ -25,7 +25,7 @@ export default function Pokelist() {
 
   return (
     <>
-      <CardGroup className="mt-5">
+      <CardGroup className="mt-5 d-flex justify-content-center">
         {pokemons.map((pokemon, index) => {
           return (
             <Pokecard

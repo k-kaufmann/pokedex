@@ -3,7 +3,7 @@ import { Pokedex, Pokemon } from "../model/Pokedex";
 
 export default function usePokedex(scrolled: Boolean = false) {
     const [pokedex, setPokedex] = useState<Pokemon[]>([])
-    const [limit, setLimit] = useState(30)
+    const [limit] = useState(30)
     const [url, setUrl] = useState<any>("https://pokeapi.co/api/v2/pokemon?limit="+limit)
 
     const fetchPokemon = useCallback(async () => {
@@ -14,7 +14,7 @@ export default function usePokedex(scrolled: Boolean = false) {
         setPokedex(pokedex => [...pokedex, ...data.results])
         setUrl(data.next)
         }
-    }, [])
+    }, [url])
 
 
     useEffect(() => {

@@ -43,7 +43,7 @@ export default function Pokecard(props: PokecardProps) {
               })}
             </Col>
             <Col className="col-4">
-              <img src={pokeImg}></img>
+              <img alt="sprite" src={pokeImg}></img>
             </Col>
           </Row>
         </Card.Body>

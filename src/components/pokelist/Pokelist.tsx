@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { CardGroup, Container } from "react-bootstrap";
+import { Pokedex, Pokemon } from "../../model/Pokedex";
 import Pokecard from "../pokecard/Pokecard";
 
 export default function Pokelist() {
-  const [pokemons, setPokemons] = useState<any[]>([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   async function fetchPokemon() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon");
+    var url: any = "https://pokeapi.co/api/v2/pokemon?limit=100";
+    var response;
+    var data: Pokedex;
 
-    const data = await response.json();
-
-    const responsePokemon = await fetch(
-      "https://pokeapi.co/api/v2/pokemon?limit=" + data.count
-      //"https://pokeapi.co/api/v2/pokemon?limit=10"
-    );
-    const dataPoke = await responsePokemon.json();
-
-    setPokemons(dataPoke.results);
+    do {
+      response = await fetch(url);
+      data = await response.json();
+      url = data.next;
+      setPokemons((pokemons) => [...pokemons, ...data.results]);
+    } while (data.next !== null);
   }
 
   useEffect(() => {

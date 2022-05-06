@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Pokemon } from "../../model/Pokemon";
 
 export interface PokecardProps {
   name: String;
@@ -12,11 +14,11 @@ export default function Pokecard(props: PokecardProps) {
 
   async function fetchPokemon() {
     const response = await fetch(props.url as RequestInfo, {});
-    const data = await response.json();
-    console.log(data);
+    const pokemon: Pokemon = await response.json();
+    console.log(pokemon);
 
-    setPokename(data.name);
-    setPokeImg(data.sprites.front_default);
+    setPokename(pokemon.name);
+    setPokeImg(pokemon.sprites.front_default);
   }
 
   useEffect(() => {
@@ -25,7 +27,12 @@ export default function Pokecard(props: PokecardProps) {
 
   return (
     <>
-      <Card className="m-2" style={{ maxWidth: "18rem", minWidth: "18rem" }}>
+      <Card
+        className="m-2 shadow"
+        style={{ maxWidth: "18rem", minWidth: "18rem" }}
+        as={Link}
+        to={"/pokemon/" + props.name}
+      >
         <Card.Body>
           <Card.Title>{pokeName}</Card.Title>
           <Row>

@@ -38,8 +38,12 @@ export default function Pokecard(props: PokecardProps) {
           <Card.Title>{pokeName}</Card.Title>
           <Row>
             <Col className="col-6">
-              {pokemon?.types.map((type) => {
-                return <Badge bg="primary m-1">{type.type.name}</Badge>;
+              {pokemon?.types.map((type, index) => {
+                return (
+                  <Badge key={index} bg="primary m-1">
+                    {type.type.name}
+                  </Badge>
+                );
               })}
             </Col>
             <Col className="col-4">
